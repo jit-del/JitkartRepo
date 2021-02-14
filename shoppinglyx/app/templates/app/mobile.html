@@ -1,0 +1,40 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+          <div class="col-sm-3">
+            <div class="list-group">
+               <a href="{% url 'mobile' %}" class="list-group-item list-group-item-action" aria-current="true">ALL Mobile</a>
+               <a href="{% url 'mobiledata' 'mi' %}" class="list-group-item list-group-item-action" aria-current="true">Mi</a>
+               <a href="{% url 'mobiledata' 'Samsung' %}" class="list-group-item list-group-item-action" aria-current="true">Samsung</a>
+               <a href="{% url 'mobiledata' 'below' %}" class="list-group-item list-group-item-action" aria-current="true"> Below15000</a>
+               <a href="{% url 'mobiledata' 'above' %}" class="list-group-item list-group-item-action" aria-current="true">Above 12500</a>
+               <a href="{% url 'mobiledata' 'Hightolow' %}" class="list-group-item list-group-item-action" aria-current="true">Price High To Low</a>
+               <a href="{% url 'mobiledata' 'lowtohigh' %}" class="list-group-item list-group-item-action" aria-current="true">Price Low To High</a>
+            </div>
+          </div>
+          <div class="col-sm-9">
+             <div class="container">
+                 <div class="row">
+                     {% for product in mobiles %}
+                         <div class="col-sm-4 text-center mb-4">
+                            <a href="{% url 'product-detail' product.id %}" class="btn">
+
+                                 <img src="{{ product.product_image.url }}" alt="" height="220" width="200" class="">
+                                 <b>{{ product.title }}</b>
+                                 <p>Rs.{{ product.discount_price }}
+                                 <small class="text-decoration-line-through" style="color: #9e74f5">({{ product.selling_price }})</small>
+                                 </p>
+
+                            </a>
+                         </div>
+                     {% endfor %}
+                 </div>
+             </div>
+          </div>
+    </div>
+</div>
+
+{% endblock main-content %}
